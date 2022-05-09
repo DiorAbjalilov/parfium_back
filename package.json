@@ -1,0 +1,14 @@
+{
+  "name": "parfium_back",
+  "version": "1.0.0",
+  "description": "node express mongodb",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/DiorAbjalilov/parfium_back.git"
+  },
+  "author": "Abjalilov Diyor <abjalilovdiyor@gmail.com>",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
+}
