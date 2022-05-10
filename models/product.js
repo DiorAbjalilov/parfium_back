@@ -21,18 +21,6 @@ const productSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
-    // product_img_2: {
-    //   type: String,
-    // },
-    // product_img_3: {
-    //   type: String,
-    // },
-    // product_img_4: {
-    //   type: String,
-    // },
-    // product_img_5: {
-    //   type: String,
-    // },
   },
   {
     timestamps: true,
