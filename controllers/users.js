@@ -1,9 +1,9 @@
 // post user signup
 const postSignUpUser = async (res, req) => {
   try {
-    res.status(200).json({ success: true, data: "post sigin user" });
+    res.status(201).json({ success: true, data: "post sigin user" });
   } catch (error) {
-    res.status(404).json({ success: false, data: [] });
+    res.status(400).json({ success: false, data: [] });
   }
 };
 
@@ -11,8 +11,12 @@ const postSignUpUser = async (res, req) => {
 const postLoginUser = async (res, req) => {
   try {
     res.status(200).json({ success: true, data: "post login user" });
+    // mijoz ro'yxatdan o'tmagan
+    res.status(401).json({ success: false, data: [] });
+    // so'ralgan ma'lumotlar yo'q serverda
+    res.status(404).json({ success: false, data: "Not Found" });
   } catch (error) {
-    res.status(404).json({ success: false, data: [] });
+    res.status(400).json({ success: false, data: [] });
   }
 };
 
@@ -21,7 +25,7 @@ const getUserId = async (res, req) => {
   try {
     res.status(200).json({ success: true, data: "get user info" });
   } catch (error) {
-    res.status(404).json({ success: false, data: [] });
+    res.status(401).json({ success: false, data: [] });
   }
 };
 
