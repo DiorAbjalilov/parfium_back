@@ -1,7 +1,7 @@
-// get one user
-const getUserId = async (res, req) => {
+// post user signup
+const postSignUpUser = async (res, req) => {
   try {
-    res.status(200).json({ success: true, data: "get user" });
+    res.status(200).json({ success: true, data: "post sigin user" });
   } catch (error) {
     res.status(404).json({ success: false, data: [] });
   }
@@ -16,16 +16,16 @@ const postLoginUser = async (res, req) => {
   }
 };
 
-// post user sigin
-const postSiginUser = async (res, req) => {
+// get user info
+const getUserId = async (res, req) => {
   try {
-    res.status(200).json({ success: true, data: "post sigin user" });
+    res.status(200).json({ success: true, data: "get user info" });
   } catch (error) {
     res.status(404).json({ success: false, data: [] });
   }
 };
 
-// put user id
+// put user info
 const putOneUser = async (res, req) => {
   try {
     res.status(200).json({ success: true, data: "update one user" });
@@ -34,7 +34,7 @@ const putOneUser = async (res, req) => {
   }
 };
 
-// delete user id
+// delete user one
 const deleteOneUser = async (res, req) => {
   try {
     res.status(200).json({ success: true, data: "delete one user" });
@@ -46,7 +46,7 @@ const deleteOneUser = async (res, req) => {
 module.exports = {
   getUserId,
   postLoginUser,
-  postSiginUser,
+  postSignUpUser,
   putOneUser,
   deleteOneUser,
 };

@@ -9,16 +9,16 @@ const {
 const {
   getUserId,
   postLoginUser,
-  postSiginUser,
+  postSignUpUser,
   putOneUser,
   deleteOneUser,
 } = require("../controllers/users");
 const router = express.Router();
 
 // users api connect
-router.get("/user/me/:id", getUserId);
+router.post("/user/signup", postSignUpUser);
 router.post("/user/login", postLoginUser);
-router.post("/user/sigin", postSiginUser);
+router.get("/user/me/:id", getUserId);
 router.put("/user/me/:id", putOneUser);
 router.delete("/user/me/:id", deleteOneUser);
 
