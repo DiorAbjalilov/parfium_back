@@ -57,7 +57,17 @@ const postLoginUser = async (req, res) => {
 // get user info
 const getUserId = async (req, res) => {
   try {
-    res.status(200).json({ success: true, data: "get user info" });
+    const isUser = await user.findById({ _id: req.params.id });
+    if (isUser.length) {
+      res
+        .status(404)
+        .json({ success: true, data: "No such information is available" });
+    } else {
+      res.status(200).json({
+        success: true,
+        data: isUser,
+      });
+    }
   } catch (error) {
     res.status(401).json({ success: false, data: [] });
   }
@@ -65,17 +75,36 @@ const getUserId = async (req, res) => {
 
 // put user info
 const putOneUser = async (req, res) => {
+  const { phone } = req.body;
   try {
-    res.status(200).json({ success: true, data: "update one user" });
-  } catch (error) {
+    const isUser = await user.findById({ _id: req.params.id });
+    console.log(isUser);
+    if (isUser) {
+      const isPhone = await user.find({ phone });
+      console.log(Boolean(isPhone.length));
+      if (!isPhone.length) {
+        Object.assign(isUser, req.body);
+        await isUser
+          .save()
+          .then(() => {
+            res.status(200).json({ success: true, data: isUser });
+          })
+          .catch((error) => {
+            res.status(400).json({ success: false, error: error });
+          });
+      }
+    }
     res.status(404).json({ success: false, data: [] });
+  } catch (error) {
+    res.status(401).json({ success: false, data: [] });
   }
 };
 
 // delete user one
 const deleteOneUser = async (req, res) => {
   try {
-    res.status(200).json({ success: true, data: "delete one user" });
+    const isUser = await user.findByIdAndRemove({ _id: req.params.id });
+    res.status(200).json({ success: true, data: "delete user" });
   } catch (error) {
     res.status(404).json({ success: false, data: [] });
   }

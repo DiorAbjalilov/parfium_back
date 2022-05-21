@@ -13,14 +13,15 @@ const {
   putOneUser,
   deleteOneUser,
 } = require("../controllers/user");
+const { authToken } = require("../middleware/auth");
 const router = express.Router();
 
 // users api connect
 router.post("/user/signup", postSignUpUser);
 router.post("/user/login", postLoginUser);
-// router.get("/user/me/:id", getUserId);
-// router.put("/user/me/:id", putOneUser);
-// router.delete("/user/me/:id", deleteOneUser);
+router.get("/user/me/:id", authToken, getUserId);
+router.put("/user/me/:id", authToken, putOneUser);
+router.delete("/user/me/:id", authToken, deleteOneUser);
 
 // // products api connect
 // router.get("/product/all", getProductAll);
