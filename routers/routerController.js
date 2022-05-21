@@ -12,21 +12,21 @@ const {
   postSignUpUser,
   putOneUser,
   deleteOneUser,
-} = require("../controllers/users");
+} = require("../controllers/user");
 const router = express.Router();
 
 // users api connect
 router.post("/user/signup", postSignUpUser);
 router.post("/user/login", postLoginUser);
-router.get("/user/me/:id", getUserId);
-router.put("/user/me/:id", putOneUser);
-router.delete("/user/me/:id", deleteOneUser);
+// router.get("/user/me/:id", getUserId);
+// router.put("/user/me/:id", putOneUser);
+// router.delete("/user/me/:id", deleteOneUser);
 
-// products api connect
-router.get("/product/all", getProductAll);
-router.post("/product/add", addNewProduct);
-router.get("/product/one/:id", getOneProduct);
-router.put("/product/one/:id", putOneProduct);
-router.delete("/product/one/:id", deleteOneProduct);
+// // products api connect
+// router.get("/product/all", getProductAll);
+// router.post("/product/add", addNewProduct);
+// router.get("/product/one/:id", getOneProduct);
+// router.put("/product/one/:id", putOneProduct);
+// router.delete("/product/one/:id", deleteOneProduct);
 
 module.exports = router;

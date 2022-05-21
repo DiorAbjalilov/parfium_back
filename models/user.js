@@ -10,10 +10,15 @@ const userSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
-    role: {
+    phone: {
+      type: Number,
+      require: true,
+    },
+    type: {
       type: String,
       require: true,
-      enum: ["admin", "user", "super"],
+      default: "user",
+      // enum: ["admin", "user", "superadmin"],
     },
   },
   {
@@ -22,10 +27,10 @@ const userSchema = new mongoose.Schema(
 );
 
 // Registr JWT
-// userSchema.methods.getSignedJWT = function () {
-//   return JWT.sign({ id: this._id }, config.JWT_SECRET, {
-//     expiresIn: config.JWT_EXPIRE,
-//   });
-// };
+userSchema.methods.getSignedJWT = function () {
+  return JWT.sign({ id: this._id }, config.JWT_SECRET, {
+    expiresIn: config.JWT_EXPIRE,
+  });
+};
 
 module.exports = mongoose.model("User", userSchema);

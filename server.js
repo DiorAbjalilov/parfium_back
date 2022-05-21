@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(cors());
 
 // api connect
-// app.use("/api", require("./routers/routerController"));
+app.use("/api", require("./routers/routerController"));
 
 // PORT
 const PORT = process.env.PORT;
