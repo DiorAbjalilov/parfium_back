@@ -16,6 +16,18 @@ const {
 const { authToken } = require("../middleware/auth");
 const router = express.Router();
 
+// photo upload
+const multer = require("multer");
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, "./public/authPhoto");
+  },
+  filename: function async(req, file, cb) {
+    cb(null, `${Date.now()}-${file.fieldname}`);
+  },
+});
+const upload = multer({ storage: storage });
+
 // users api connect
 router.post("/user/signup", postSignUpUser);
 router.post("/user/login", postLoginUser);
