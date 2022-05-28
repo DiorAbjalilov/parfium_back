@@ -8,7 +8,7 @@ const postSignUpUser = async (req, res) => {
     const { username, password, phone } = req.body;
     const isUser = await user.find({ phone });
     if (isUser.length) {
-      res.status(401).json({ success: false, data: "Such a user exists" });
+      res.status(401).json({ success: false, data: [], message: "user exist" });
     } else {
       const createNewUser = new user({
         username,
@@ -18,12 +18,15 @@ const postSignUpUser = async (req, res) => {
       const payload = { subject: createNewUser._id };
       const token = jwt.sign(payload, config.JWT_SECRET);
       await createNewUser.save();
-      res
-        .status(201)
-        .json({ success: true, data: createNewUser, token: token });
+      res.status(201).json({
+        success: true,
+        data: createNewUser,
+        token: token,
+        message: "user created",
+      });
     }
   } catch (error) {
-    res.status(400).json({ success: false, data: [] });
+    res.status(400).json({ success: false, data: [], message: error });
     console.log(error);
   }
 };
@@ -33,24 +36,29 @@ const postLoginUser = async (req, res) => {
   const { password, phone } = req.body;
   try {
     if (!phone || !password) {
-      res
-        .status(400)
-        .json({ success: false, data: "Please provide email and password" });
+      res.status(400).json({
+        success: false,
+        data: [],
+        message: "phone or password is empty",
+      });
     }
     const isUser = await user.find({ phone, password });
     if (!isUser.length) {
       res
         .status(404)
-        .json({ success: true, data: "No such information is available" });
+        .json({ success: true, data: [], message: "user not found" });
     } else {
       const payload = { subject: isUser._id };
       const token = jwt.sign(payload, config.JWT_SECRET);
       res.status(200).json({
+        success: true,
         token: token,
+        data: isUser,
+        message: "user login",
       });
     }
   } catch (error) {
-    res.status(400).json({ success: false, data: [] });
+    res.status(400).json({ success: false, data: [], message: error });
   }
 };
 
@@ -61,15 +69,16 @@ const getUserId = async (req, res) => {
     if (isUser.length) {
       res
         .status(404)
-        .json({ success: true, data: "No such information is available" });
+        .json({ success: true, data: [], message: "user not found" });
     } else {
       res.status(200).json({
         success: true,
         data: isUser,
+        message: "user info",
       });
     }
   } catch (error) {
-    res.status(401).json({ success: false, data: [] });
+    res.status(401).json({ success: false, data: [], message: error });
   }
 };
 
@@ -87,16 +96,20 @@ const putOneUser = async (req, res) => {
         await isUser
           .save()
           .then(() => {
-            res.status(200).json({ success: true, data: isUser });
+            res
+              .status(200)
+              .json({ success: true, data: isUser, message: "user updated" });
           })
           .catch((error) => {
-            res.status(400).json({ success: false, error: error });
+            res.status(400).json({ success: false, data: [], message: error });
           });
       }
     }
-    res.status(404).json({ success: false, data: [] });
+    res
+      .status(404)
+      .json({ success: false, data: [], message: "user not found" });
   } catch (error) {
-    res.status(401).json({ success: false, data: [] });
+    res.status(401).json({ success: false, data: [], message: error });
   }
 };
 
@@ -104,9 +117,9 @@ const putOneUser = async (req, res) => {
 const deleteOneUser = async (req, res) => {
   try {
     await user.findByIdAndRemove({ _id: req.params.id });
-    res.status(200).json({ success: true, data: "delete user" });
+    res.status(200).json({ success: true, data: [], message: "user deleted" });
   } catch (error) {
-    res.status(404).json({ success: false, data: [] });
+    res.status(404).json({ success: false, data: [], message: error });
   }
 };
 
