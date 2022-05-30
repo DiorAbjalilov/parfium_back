@@ -19,7 +19,7 @@ const authToken = async (req, res, next) => {
   }
 };
 
-// exports.moderator = function (req, res, next) {
+// exports.user = function (req, res, next) {
 //   if (req.user.role !== "moderator") {
 //     return next(
 //       new ErrorResponse(
@@ -31,7 +31,7 @@ const authToken = async (req, res, next) => {
 //   next();
 // };
 
-const admin = function (req, res, next) {
+const superadmin = function (req, res, next) {
   if (req.user.role !== "admin") {
     return next(
       new ErrorResponse(
@@ -42,7 +42,7 @@ const admin = function (req, res, next) {
   }
   next();
 };
-// exports.moderatorAll = function (req, res, next) {
+// exports.admin = function (req, res, next) {
 //   if (req.user.role !== "moderator") {
 //     return next(
 //       new ErrorResponse(

@@ -20,6 +20,12 @@ const userSchema = new mongoose.Schema(
       default: "user",
       // enum: ["admin", "user", "superadmin"],
     },
+    likes: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Product",
+      },
+    ],
   },
   {
     timestamps: true,
