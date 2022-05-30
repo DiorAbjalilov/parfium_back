@@ -14,6 +14,10 @@ const productSchema = new mongoose.Schema(
       type: String,
       require: true,
     },
+    bassic_store: {
+      type: String,
+      require: true,
+    },
     description: {
       type: String,
     },
